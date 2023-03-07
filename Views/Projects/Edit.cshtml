@@ -1,0 +1,278 @@
+﻿@model TatRom_BugTracker.Models.Project
+@using TatRom_BugTracker.Services.Interfaces
+@using TatRom_BugTracker.Models.Enums
+
+@inject IBTFileService _FileService
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<link rel="stylesheet" href="~/template/vendor/select2/css/select2.css" />
+<link rel="stylesheet" href="~/template/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+<link rel="stylesheet" href="~/template/vendor/dropzone/basic.css" />
+<link rel="stylesheet" href="~/template/vendor/dropzone/dropzone.css" />
+<link rel="stylesheet" href="~/template/vendor/bootstrap-markdown/css/bootstrap-markdown.min.css" />
+<link rel="stylesheet" href="~/template/vendor/pnotify/pnotify.custom.css" />
+
+<!-- Theme Layout -->
+<link rel="stylesheet" href="~/template/css/layouts/modern.css" />
+
+<section role="main" class="content-body content-body-modern mt-0">
+	@*<header class="page-header page-header-left-inline-breadcrumb">*@
+@*	<h2 class="font-weight-bold text-6">Create New Project</h2>
+	<div class="right-wrapper">
+	<ol class="breadcrumbs">
+
+	<li><span>Home</span></li>
+
+	<li><span>Dedails</span></li>
+
+	<li><span>Edit</span></li>
+
+	</ol>
+
+	<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
+	</div>*@
+	@*</header>*@
+
+	<!-- start: page -->
+	<h2 class="font-weight-bold text-6">Edit Project</h2>
+	<form class="ecommerce-form action-buttons-fixed" asp-action="Edit" asp-controller="Projects" method="post" enctype="multipart/form-data">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="row mt-2">
+			<div class="col">
+				<section class="card card-modern card-big-info">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-2-5 col-xl-1-5">
+								<i class="card-big-info-icon bx bx-box"></i>
+								<h2 class="card-big-info-title">General Info</h2>
+								<p class="card-big-info-desc">Add here the product description with all details and necessary information.</p>
+							</div>
+							<div class="col-lg-3-5 col-xl-4-5">
+								<div class="form-group row align-items-center pb-3">
+									<label asp-for="Name" class="col-lg-5 col-xl-3 control-label text-lg-end mb-0">Project Name</label>
+									<div class="col-lg-7 col-xl-6">
+										<input asp-for="Name" type="text" class="form-control form-control-modern"  />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label asp-for="Description" class="col-lg-5 col-xl-3 control-label text-lg-end pt-2 mt-1 mb-0">Project Description</label>
+									<div class="col-lg-7 col-xl-6">
+										<textarea asp-for="Description" class="form-control form-control-modern" rows="6"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<section class="card card-modern card-big-info">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-2-5 col-xl-1-5">
+								<i class="card-big-info-icon bx bx-camera"></i>
+								<h2 class="card-big-info-title">Project Image</h2>
+								<p class="card-big-info-desc">Upload your Project image. You can add multiple images</p>
+							</div>
+							<div class="col-lg-3-5 col-xl-4-5">
+								<div class="form-group row align-items-center">
+									<div class="col">
+										<div id="dropzone-form-image" class="dropzone-modern dz-square">
+											<span class="dropzone-upload-message text-center">
+												<i class="bx bxs-cloud-upload"></i>
+												<b class="text-color-primary">Drag/Upload</b> your images here.
+											</span>
+											<img class="img-fluid border rounded-3 m-2" style="max-height: 250px;"
+												 src="@_FileService.ConvertByteArrayToFile(Model.ImageFileData!, Model.ImageFileType!, (int)DefaultImage.ProjectImage)">
+											<input type="file" asp-for="ImageFormFile" class="form-control w-100" accept=".png,.jpg,.jpeg,.gif,.svg"
+												   onchange="document.getElementById('blogImage').src = window.URL.createObjectURL(this.files[0])" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<section class="card card-modern card-big-info">
+					<div class="form-group row pb-3">
+						<label asp-for="StartDate" class="col-lg-3 control-label text-lg-end pt-2">Start Date</label>
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-calendar-alt"></i>
+								</span>
+								<input asp-for="StartDate" type="text" data-plugin-datepicker class="form-control">
+								<span asp-validation-for="StartDate" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row pb-3">
+						<label asp-for="EndDate" class="col-lg-3 control-label text-lg-end pt-2">End Date</label>
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-text">
+									<i class="fas fa-calendar-alt"></i>
+								</span>
+								<input asp-for="EndDate" type="text" data-plugin-datepicker class="form-control">
+								<span asp-validation-for="EndDate" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row pb-3">
+						<label asp-for="ProjectPriorityId" class="col-lg-3 control-label text-lg-end pt-2">Ticket Type</label>
+						<div class="col-lg-6">
+							<select asp-for="ProjectPriorityId" asp-items="ViewBag.ProjectPriorityId" data-plugin-selectTwo class="form-control populate">
+							</select>
+						</div>
+					</div>
+
+					@*<div class="form-group">
+						<label asp-for="StartDate" class="control-label"></label>
+						<input asp-for="StartDate" class="form-control" />
+						<span asp-validation-for="StartDate" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="EndDate" class="control-label"></label>
+						<input asp-for="EndDate" class="form-control" />
+						<span asp-validation-for="EndDate" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="ProjectPriorityId" class="control-label"></label>
+						<select asp-for="ProjectPriorityId" class="form-control" asp-items="ViewBag.ProjectPriorityId"></select>
+					</div>*@
+					
+				</section>
+			</div>
+		</div>
+		<div class="row action-buttons">
+			<div class="col-12 col-md-auto">
+				<button type="submit" value="Edit" class="btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1" data-loading-text="Loading...">
+					<i class="bx bx-save text-4 me-2"></i> Save Project
+				</button>
+
+				@*<button type="submit" value="Create" class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1" data-loading-text="Loading...">
+				<i class="bx bx-save text-4 me-2"></i> Save Project
+				</button>*@
+				@*<a value="Create" class="btn btn-submit btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1" data-loading-text="Loading...">
+				<i class="bx bx-save text-4 me-2"></i> Save Project
+				</a>*@
+				@*<div class="form-group">
+					<input type="submit" value="Edit" method="Post" asp-action="Edit" asp-controller="Projects" class=" btn btn-primary" />
+				</div>*@
+			</div>
+			<div class="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
+				<a asp-action="Index" asp-controller="Home" class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Cancel</a>
+			</div>
+			@*<div class="col-12 col-md-auto ms-md-auto mt-3 mt-md-0 ms-auto">
+				<a asp-action="Delete" asp-controller="Projects" class="delete-button btn btn-danger btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1">
+					<i class="bx bx-trash text-4 me-2"></i> Delete Project
+				</a>
+			</div>*@
+		</div>
+	</form>
+	<!-- end: page -->
+</section>
+
+
+
+
+@*<h1>Edit</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />*@
+
+
+            @*<div class="form-group">
+                <label asp-for="CompanyId" class="control-label"></label>
+                <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.CompanyId"></select>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div>*@
+
+
+            @*<div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>*@
+
+
+            @*<div class="form-group">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>*@
+
+            @*<div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectPriorityId" class="control-label"></label>
+                <select asp-for="ProjectPriorityId" class="form-control" asp-items="ViewBag.ProjectPriorityId"></select>
+                <span asp-validation-for="ProjectPriorityId" class="text-danger"></span>
+            </div>*@
+
+            @*<div class="form-group">
+                <label asp-for="ImageFileData" class="control-label"></label>
+                <input asp-for="ImageFileData" class="form-control" />
+                <span asp-validation-for="ImageFileData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFileType" class="control-label"></label>
+                <input asp-for="ImageFileType" class="form-control" />
+                <span asp-validation-for="ImageFileType" class="text-danger"></span>
+            </div>*@
+
+           @* <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Archived" /> @Html.DisplayNameFor(model => model.Archived)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+	<!-- Specific Page Vendor -->
+	<script src="~/template/vendor/jquery-validation/jquery.validate.js"></script>
+	<script src="~/template/vendor/select2/js/select2.js"></script>
+	<script src="~/template/vendor/dropzone/dropzone.js"></script>
+	<script src="~/template/vendor/pnotify/pnotify.custom.js"></script>
+
+	<!-- Examples -->
+	<script src="~/template/js/examples/examples.header.menu.js"></script>
+	<script src="~/template/js/examples/examples.ecommerce.form.js"></script>
+}

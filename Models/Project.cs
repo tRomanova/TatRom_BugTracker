@@ -13,11 +13,11 @@ namespace TatRom_BugTracker.Models
 
         [Required]
         [Display(Name = "Project Name")]
-        [StringLength(40, ErrorMessage = "The {0} must be at least {2} and at most {1} characters", MinimumLength = 2)]
+        [StringLength(120, ErrorMessage = "The {0} must be at least {2} and at most {1} characters", MinimumLength = 2)]
         public string? Name { get; set; }
 
         [Required]
-        [StringLength(600, ErrorMessage = "The {0} must be at least {2} and at most {1} characters", MinimumLength = 2)]
+        [StringLength(2000, ErrorMessage = "The {0} must be at least {2} and at most {1} characters", MinimumLength = 2)]
         public string? Description { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -33,11 +33,11 @@ namespace TatRom_BugTracker.Models
         public int ProjectPriorityId { get; set; }
 
         //Image Properties
-        public byte[]? ImageData { get; set; }
-        public string? ImageType { get; set; }
+        public byte[]? ImageFileData { get; set; }
+        public string? ImageFileType { get; set; }
 
         [NotMapped]
-        public virtual IFormFile? ImageFile { get; set; }
+        public virtual IFormFile? ImageFormFile { get; set; }
 
         public bool Archived { get; set; }
 
@@ -46,11 +46,9 @@ namespace TatRom_BugTracker.Models
         public virtual ProjectPriority? ProjectPriority { get; set; }
 
         // Members
-        [JsonIgnore]
         public virtual ICollection<BTUser> Members { get; set; } = new HashSet<BTUser>();
 
         // Tickets
-        [JsonIgnore]
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
     }
 }

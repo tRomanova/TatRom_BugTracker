@@ -21,11 +21,11 @@ namespace TatRom_BugTracker.Models
         public string? BTUserId { get; set; }
 
         //Image Properties
-        public byte[]? ImageData { get; set; }
-        public string? ImageType { get; set; }
+        public byte[]? ImageFileData { get; set; }
+        public string? ImageFileType { get; set; }
 
         [NotMapped]
-        public virtual IFormFile? ImageFile { get; set; }
+        public virtual IFormFile? ImageFormFile { get; set; }
 
         //Navigation properties
         public virtual Ticket? Ticket { get; set; }

@@ -1,0 +1,328 @@
+﻿@model TatRom_BugTracker.Models.Ticket
+
+@{
+	ViewData["Title"] = "Create";
+}
+<link rel="stylesheet" href="~/template/vendor/select2/css/select2.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/dropzone/basic.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/dropzone/dropzone.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/bootstrap-markdown/css/bootstrap-markdown.min.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/summernote/summernote-bs4.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/codemirror/lib/codemirror.css" />
+<link rel="stylesheet" href="~/template/vendor/vendor/codemirror/theme/monokai.css" />
+
+
+<link rel="stylesheet" href="~/template/vendor/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css" />
+
+<!-- start: page -->
+<section role="main" class="content-body card-margin">
+	<header class="page-header">
+		<h2>Create Ticket</h2>
+
+		<div class="right-wrapper text-end">
+			@*<ol class="breadcrumbs">
+				<li>
+					<a href="index.html">
+						<i class="bx bx-home-alt"></i>
+					</a>
+				</li>
+
+				<li><span>Forms</span></li>
+
+				<li><span>Advanced</span></li>
+
+			</ol>*@
+
+			@*<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>*@
+		</div>
+	</header>
+	<div class="row">
+		<div class="col">
+			<section class="card">
+				<header class="card-header">
+					<div class="card-actions">
+						<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+						<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+					</div>
+
+					@*<h2 class="card-title">Create Ticket</h2>*@
+				</header>
+				<div class="card-body">
+					<form class="form-horizontal form-bordered" asp-action="Create" asp-controller="Tickets">
+						<div class="form-group row pb-3">
+							<label asp-for="Title" class="col-lg-3 control-label text-lg-end pt-2" for="textareaDefault"></label>
+							<div class="col-lg-6">
+								<input asp-for="Title" class="form-control" />
+								<span asp-validation-for="Title" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-group row pb-3">
+							<label asp-for="Description" class="col-lg-3 control-label text-lg-end pt-2" for="textareaDefault"></label>
+							<div class="col-lg-6">
+								<input asp-for="Description" class="form-control" />
+								<span asp-validation-for="Description" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-group row pb-3">
+							<label asp-for="Created" class="col-lg-3 control-label text-lg-end pt-2"></label>
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-text">
+										<i class="fas fa-calendar-alt"></i>
+									</span>
+									<input asp-for="Created" type="text" data-plugin-datepicker class="form-control">
+									<span asp-validation-for="Created" class="text-danger"></span>
+								</div>
+							</div>
+						</div>
+						@*<div class="form-group row pb-3">
+						<label asp-for="Updated" class="col-lg-3 control-label text-lg-end pt-2"></label>
+						<div class="col-lg-6">
+						<div class="input-group">
+						<span class="input-group-text">
+						<i class="fas fa-calendar-alt"></i>
+						</span>
+						<input asp-for="Updated" type="text" data-plugin-datepicker class="form-control">
+						<span asp-validation-for="Updated" class="text-danger"></span>
+						</div>
+						</div>
+						</div>*@
+						@*<div class="form-group row pb-3">
+						<label class="col-lg-3 control-label text-lg-end pt-2" for="textareaDefault">Input</label>
+						<div class="col-lg-6">
+						<input class="form-control" data-plugin-maxlength maxlength="20" />
+						<p>
+						<code>max-length</code> set to 20.
+						</p>
+						</div>
+						</div>*@
+						<div class="form-group row pb-3">
+							<label asp-for="ProjectId" class="col-lg-3 control-label text-lg-end pt-2">Project</label>
+							<div class="col-lg-6">
+								<select asp-for="ProjectId" asp-items="ViewBag.ProjectId" data-plugin-selectTwo class="form-control populate">
+								</select>
+							</div>
+						</div>
+						<div class="form-group row pb-3">
+							<label asp-for="TicketTypeId" class="col-lg-3 control-label text-lg-end pt-2">Ticket Type</label>
+							<div class="col-lg-6">
+								<select asp-for="TicketTypeId" asp-items="ViewBag.TicketTypeId" data-plugin-selectTwo class="form-control populate">
+									@*<optgroup label="Alaskan/Hawaiian Time Zone">
+
+									</optgroup>*@
+								</select>
+							</div>
+						</div>
+						<div class="form-group row pb-3">
+							<label asp-for="TicketStatusId" class="col-lg-3 control-label text-lg-end pt-2">Ticket Status</label>
+							<div class="col-lg-6">
+								<select asp-for="TicketStatusId" asp-items="ViewBag.TicketStatusId" data-plugin-selectTwo class="form-control populate">
+								</select>
+							</div>
+						</div>
+						<div class="form-group row pb-3">
+							<label asp-for="TicketPriorityId" class="col-lg-3 control-label text-lg-end pt-2">Ticket Priority</label>
+							<div class="col-lg-6">
+								<select asp-for="TicketPriorityId" asp-items="ViewBag.TicketPriorityId" data-plugin-selectTwo class="form-control populate">
+								</select>
+							</div>
+						</div>
+						<div class="form-group row pb-3">
+							<label asp-for="DeveloperUserId" class="col-lg-3 control-label text-lg-end pt-2">Developer User</label>
+							<div class="col-lg-6">
+								<select asp-for="DeveloperUserId" asp-items="ViewBag.SubmitterUserId" data-plugin-selectTwo class="form-control populate">
+								</select>
+							</div>
+						</div>
+						@*<div class="form-group row pb-3">
+						<div class="checkbox-custom checkbox-success">
+						<input asp-for="Archived" type="checkbox" col-lg-6 value="">
+						<label asp-for="Archived" class="col-lg-3 control-label text-lg-end pt-2">Archived</label>
+						</div>
+						</div>
+						<div class="form-group row pb-3">
+						<div class="checkbox-custom checkbox-success">
+						<input asp-for="ArchivedByProject" col-lg-6 value="">
+						<label asp-for="ArchivedByProject" class="col-lg-3 control-label text-lg-end pt-2">Archived By Project</label>
+						</div>
+						</div>*@
+
+
+						<div class="card-body">
+							<div class="row">
+								<div class="col-lg-6 mb-3 mb-lg-0">
+									<div class="form-group row pb-3">
+										<div class="col-lg-6 mb-3">
+											<div class="checkbox-custom checkbox-success">
+												<input asp-for="Archived" type="checkbox" value="">
+												<label asp-for="Archived">Archived</label>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="col-sm-8">
+												<div class="checkbox-custom checkbox-success">
+													<input asp-for="ArchivedByProject" value="">
+													<label asp-for="ArchivedByProject">Archived By Project</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						@*<div class="card-body">
+							<div class="row">
+								<div class="col-lg-6 mb-3 mb-lg-0">
+									<div class="form-group row pb-4">
+										<div class="form-group row pb-3">
+											<div class="col-lg-6 mb-3">
+												<div class="form-group row pb-4">
+													<div class="checkbox-custom checkbox-success">
+														<input asp-for="Archived" type="checkbox" value="">
+														<label asp-for="Archived">Archived</label>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="form-group row pb-4">
+													<div class="col-sm-8">
+														<div class="checkbox-custom checkbox-success">
+															<input asp-for="ArchivedByProject" value="">
+															<label asp-for="ArchivedByProject">Archived By Project</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>*@
+
+
+						<div class="form-group">
+							<input type="submit" asp-action="Create" asp-controller="Tickets" method="Post" value="Create" class="btn btn-primary" />
+						</div>
+					</form>
+				</div>
+			</section>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+@*<h1>Create</h1>
+
+<h4>Ticket</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Updated" class="control-label"></label>
+                <input asp-for="Updated" class="form-control" />
+                <span asp-validation-for="Updated" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Archived" /> @Html.DisplayNameFor(model => model.Archived)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ArchivedByProject" /> @Html.DisplayNameFor(model => model.ArchivedByProject)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectId" class="control-label"></label>
+                <select asp-for="ProjectId" class ="form-control" asp-items="ViewBag.ProjectId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketTypeId" class="control-label"></label>
+                <select asp-for="TicketTypeId" class ="form-control" asp-items="ViewBag.TicketTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketStatusId" class="control-label"></label>
+                <select asp-for="TicketStatusId" class ="form-control" asp-items="ViewBag.TicketStatusId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketPriorityId" class="control-label"></label>
+                <select asp-for="TicketPriorityId" class ="form-control" asp-items="ViewBag.TicketPriorityId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeveloperUserId" class="control-label"></label>
+                <select asp-for="DeveloperUserId" class="form-control" asp-items="ViewBag.SubmitterUserId"></select>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="SubmitterUserId" class="control-label"></label>
+                <input asp-for="SubmitterUserId" class="form-control" />
+                <span asp-validation-for="SubmitterUserId" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+*@
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	<script src="~/template/vendor/vendor/select2/js/select2.js"></script>
+	<script src="~/template/vendor/vendor/jquery-maskedinput/jquery.maskedinput.js"></script>
+	<script src="~/template/vendor/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+	<script src="~/template/vendor/vendor/bootstrapv5-colorpicker/js/bootstrap-colorpicker.js"></script>
+	<script src="~/template/vendor/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+	<script src="~/template/vendor/vendor/fuelux/js/spinner.js"></script>
+	<script src="~/template/vendor/vendor/dropzone/dropzone.js"></script>
+	<script src="~/template/vendor/vendor/bootstrap-markdown/js/markdown.js"></script>
+	<script src="~/template/vendor/vendor/bootstrap-markdown/js/to-markdown.js"></script>
+	<script src="~/template/vendor/vendor/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+	<script src="~/template/vendor/vendor/codemirror/lib/codemirror.js"></script>
+	<script src="~/template/vendor/vendor/codemirror/addon/selection/active-line.js"></script>
+	<script src="~/template/vendor/vendor/codemirror/addon/edit/matchbrackets.js"></script>
+	<script src="~/template/vendor/vendor/codemirror/mode/javascript/javascript.js"></script>
+	<script src="~/template/vendor/vendor/codemirror/mode/xml/xml.js"></script>
+	<script src="~/template/vendor/vendor/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="~/template/vendor/vendor/codemirror/mode/css/css.js"></script>
+	<script src="~/template/vendor/vendor/summernote/summernote-bs4.js"></script>
+	<script src="~/template/vendor/vendor/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+	<script src="~/template/vendor/vendor/ios7-switch/ios7-switch.js"></script>
+}

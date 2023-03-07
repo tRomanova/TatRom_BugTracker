@@ -1,0 +1,190 @@
+﻿@model IEnumerable<TatRom_BugTracker.Models.Project>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section role="main" class="content-body">
+	@*<header class="page-header">
+		<h2>Responsive Tables</h2>
+
+		<div class="right-wrapper text-end">
+			<ol class="breadcrumbs">
+				<li>
+					<a href="index.html">
+						<i class="bx bx-home-alt"></i>
+					</a>
+				</li>
+
+				<li><span>Tables</span></li>
+
+				<li><span>Responsive</span></li>
+
+			</ol>
+
+			<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
+		</div>
+	</header>*@
+
+	<!-- start: page -->
+	<div class="alert alert-info">
+		Resize the browser to see the responsiveness in action.
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<section class="card">
+				<header class="card-header">
+					<div class="card-actions">
+						<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+						<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+					</div>
+
+					<h2 class="card-title">List of Projects</h2>
+				</header>
+				<div class="card-body">
+					<table class="table table-responsive-lg table-bordered table-striped table-sm mb-0">
+						<thead>
+							<tr>
+                                @*<th>Company Name</th>*@
+								<th>Project Name</th>
+								<th>DIscription</th>
+                                <th class="text-end">Start Date</th>
+                                <th class="text-end">End Date</th>
+                                <th class="text-end">Archived</th>
+                                <th class="text-end">Project Priority</th>
+							</tr>
+						</thead>
+						<tbody>
+                            @foreach (Project project in Model) {
+							<tr>
+								@*<td class="text-end">@project.Company!.Name</td>*@
+                                <td>@project.Name</td>
+                                <td>@project.Description</td>
+								<td class="text-end">@project.StartDate</td>
+								<td class="text-end">@project.EndDate</td>
+								<td class="text-end">@project.Archived</td>
+								<td class="text-end">@project.ProjectPriority!.Name</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@project.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@project.Id">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@project.Id">Delete</a>
+                                </td>
+							</tr>
+                            }
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- end: page -->
+</section>
+
+
+@*<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>*@
+
+
+
+            @*<th>
+                @Html.DisplayNameFor(model => model.ImageFormFile)
+            </th>*@
+
+
+
+@*
+            <th>
+                @Html.DisplayNameFor(model => model.ImageFileData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageFileType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Archived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectPriority)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>*@
+
+
+
+
+            @*<td>
+                    <img src="@_BTFileService.ConvertByteArrayToFile(item.ImageFileData!, item.ImageFileType!, (int)DefaultImage.ProjectImage)" alt="Post Images" />
+            </td>*@
+
+
+
+
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ImageFileData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageFileType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Archived)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company!.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectPriority!.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@

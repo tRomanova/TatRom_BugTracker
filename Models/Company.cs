@@ -13,28 +13,25 @@ namespace TatRom_BugTracker.Models
         [StringLength(150, ErrorMessage = "The {0} must be at least {2} and at most {1} characters", MinimumLength = 2)]
         public string? Name { get; set; }
 
-        [StringLength(600, ErrorMessage = "The {0} must be at least {2} and at most {1} characters", MinimumLength = 2)]
+        [StringLength(2000, ErrorMessage = "The {0} must be at least {2} and at most {1} characters", MinimumLength = 2)]
         public string? Description { get; set; }
 
         //Image Properties
-        public byte[]? ImageData { get; set; }
-        public string? ImageType { get; set; }
+        public byte[]? ImageFileData { get; set; }
+        public string? ImageFileType { get; set; }
 
         [NotMapped]
-        public virtual IFormFile? ImageFile { get; set; }
+        public virtual IFormFile? ImageFormFile { get; set; }
 
         // navigation properties
 
         //Projects
-        [JsonIgnore]
         public virtual ICollection<Project> Projects { get; set; } = new HashSet<Project>();
 
         //Members
-        [JsonIgnore]
         public virtual ICollection<BTUser> Members { get; set; } = new HashSet<BTUser>();
 
         //Invites
-        [JsonIgnore]
-        public virtual ICollection<BTUser> Invites { get; set; } = new HashSet<BTUser>();
+        public virtual ICollection<Invite> Invites { get; set; } = new HashSet<Invite>();
     }
 }

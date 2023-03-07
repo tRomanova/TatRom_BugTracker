@@ -22,13 +22,12 @@ namespace TatRom_BugTracker.Models
         [Display(Name = "Full Name")]
         public string FullName { get { return $"{FirstName} {LastName}"; } }
 
-
         // Image Properties
-        public byte[]? ImageDat { get; set; }
-        public string? ImageType { get; set; }
+        public byte[]? ImageFileData { get; set; }
+        public string? ImageFileType { get; set; }
 
         [NotMapped]
-        public virtual IFormFile? ImageFile { get; set; }
+        public virtual IFormFile? ImageFormFile { get; set; }
 
         //[FK] CompanyId (int)
         public int CompanyId { get; set; }
@@ -37,7 +36,6 @@ namespace TatRom_BugTracker.Models
         public virtual Company? Company { get; set; }
 
         // Projects
-        [JsonIgnore]
         public virtual ICollection<Project> Projects { get; set; } = new HashSet<Project>();
     }
 }
